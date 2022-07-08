@@ -2,6 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
+// Estructura de tabla con restricciones y especificaciones y la forma en que se espera en formato json
 type User struct {
 	gorm.Model
 

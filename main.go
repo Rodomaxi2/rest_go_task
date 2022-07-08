@@ -12,13 +12,17 @@ import (
 
 func main() {
 
+	// Instancia de la base de datos y conexion
 	db.DBConnection()
 
+	// Migracion de las tablas
 	db.DB.AutoMigrate(models.Task{})
 	db.DB.AutoMigrate(models.User{})
 
+	// Instancia de router de gorilla/mux
 	router := mux.NewRouter()
 
+	// Creacion de rutas y manejadores para operaciones
 	router.HandleFunc("/", routes.HomeHandler)
 
 	router.HandleFunc("/users", routes.GetUsersHandler).Methods("GET")
@@ -31,5 +35,6 @@ func main() {
 	router.HandleFunc("/tasks/{id}", routes.GetTaskHandler).Methods("GET")
 	router.HandleFunc("/tasks/{id}", routes.DeleteTaskHandler).Methods("DELETE")
 
+	// Iniciacion del servidor
 	http.ListenAndServe(":3000", router)
 }
